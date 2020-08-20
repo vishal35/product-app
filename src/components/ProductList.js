@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
 import Cards from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid";
@@ -8,12 +7,11 @@ import CardActions from "@material-ui/core/CardActions";
 import DeleteIcon from "@material-ui/icons/Delete";
 import IconButton from "@material-ui/core/IconButton";
 import Paper from "@material-ui/core/Paper";
-import uuid from "uuid";
 
-const ProductList = ({ productDetails, deleteProducts, ...props }) => {
+const ProductList = ({ productDetails, deleteProduct, ...props }) => {
   console.log("productList", productDetails);
   const handleDeleteClick = (id) => {
-    console.log(id);
+    deleteProduct(id);
   };
   return (
     <Paper
@@ -21,7 +19,7 @@ const ProductList = ({ productDetails, deleteProducts, ...props }) => {
       style={{ background: "#0d0b07", padding: "40px 20px" }}
     >
       <h2 style={{ color: "white" }}>All Jobs</h2>
-      <Grid container spacing={3} xs={12}>
+      <Grid container spacing={3}>
         {productDetails.map((product, index) => (
           <Grid item xs={4} key={index}>
             <Cards>
@@ -33,8 +31,8 @@ const ProductList = ({ productDetails, deleteProducts, ...props }) => {
                 <Typography>{product.price}</Typography>
               </CardContent>
               <CardActions>
-                <IconButton aria-label="add to favorites">
-                  <DeleteIcon onClick={(id) => handleDeleteClick(id)} />
+                <IconButton onClick={() => handleDeleteClick(product.id)}>
+                  <DeleteIcon />
                 </IconButton>
               </CardActions>
             </Cards>

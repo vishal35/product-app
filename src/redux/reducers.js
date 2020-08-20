@@ -1,4 +1,4 @@
-import { ADD_PRODUCT } from "./constants";
+import { ADD_PRODUCT, DELETE_PRODUCT } from "./constants";
 
 const INITIAL_STATE = {
   counter: 0,
@@ -31,6 +31,16 @@ export default function counterReducer(
       const productDetails = state.productDetails;
       console.log("reducers addproduct", payload);
       return { ...state, productDetails: [...productDetails, payload] };
+    }
+    case DELETE_PRODUCT: {
+      const productId = payload;
+      let productDetails = state.productDetails;
+
+      productDetails = productDetails.filter(
+        (product) => product.id !== productId
+      );
+      console.log("DeleteReducers", productDetails);
+      return { ...state, productDetails };
     }
     default:
       return state;
