@@ -6,6 +6,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
+import { Hidden } from "@material-ui/core";
+import { v4 as uuidv4 } from "uuid";
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -13,9 +15,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function AddProduct() {
+export default function AddProduct({
+  addProduct,
+  deleteProduct,
+  productDetails,
+  ...props
+}) {
+  console.log("props addproducts", productDetails);
   const classes = useStyles();
   const [productData, setProductData] = useState({
+    id: "",
     title: "",
     description: "",
     category: "",
@@ -24,7 +33,9 @@ export default function AddProduct() {
   });
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log("111", productData);
+    const id = uuidv4();
+    // console.log("111", productData);
+    addProduct({ productId: id, ...productData });
   };
   const formInputChangedHandler = (event) => {
     setProductData({
