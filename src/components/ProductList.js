@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundSize: "contain",
   },
   header: {
-    color: "white",
+    color: "black",
     textAlign: "center",
   },
 }));
@@ -51,7 +51,7 @@ const ProductList = ({
   return (
     <Paper
       className="root"
-      style={{ background: "#0d0b07", padding: "40px 20px" }}
+      style={{ background: "#efefef", padding: "40px 20px" }}
     >
       <h2 className={classes.header}>All Products</h2>
       <Grid container spacing={3}>
@@ -73,9 +73,9 @@ const ProductList = ({
                     <Typography variant="subtitle1" color="textSecondary">
                       {product.description}
                     </Typography>
-                    <Typography>{product.brand}</Typography>
-                    <Typography>{product.category}</Typography>
-                    <Typography>{product.price}</Typography>
+                    <Typography>Brand : {product.brand}</Typography>
+                    <Typography>Category : {product.category}</Typography>
+                    <Typography>Price : {product.price}</Typography>
                   </CardContent>
                   <CardActions>
                     <IconButton onClick={() => handleDeleteClick(product.id)}>

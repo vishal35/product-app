@@ -13,8 +13,8 @@
   }
 }
 
-.App-header {
-  background-color: #282c34;
+/* .App-header {
+  background-color: gray;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -22,11 +22,11 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
+} */
 
-.App-link {
-  color: #61dafb;
-}
+/* .App-link {
+  color: #bccbcf;
+} */
 
 @keyframes App-logo-spin {
   from {
@@ -35,4 +35,18 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.style-none {
+  list-style: none;
+}
+
+.list {
+  text-align: left;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+  width: 250px;
 }
