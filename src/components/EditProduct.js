@@ -6,20 +6,13 @@ import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
 import Snackbar from "@material-ui/core/Snackbar";
-import { v4 as uuidv4 } from "uuid";
 
 const useStyles = makeStyles((theme) => ({
   form: {
     width: "100%",
   },
 }));
-
-export default function AddProduct({
-  addProduct,
-  deleteProduct,
-  productDetails,
-  ...props
-}) {
+export default function EditProduct({ editProduct, ...props }) {
   const [open, setOpen] = React.useState(false);
 
   const handleClose = (event, reason) => {
@@ -29,19 +22,27 @@ export default function AddProduct({
 
     setOpen(false);
   };
-  const classes = useStyles();
+  const {
+    title,
+    id,
+    description,
+    brand,
+    price,
+    category,
+    image,
+  } = props.location.state;
   const [productData, setProductData] = useState({
-    id: "",
-    title: "",
-    description: "",
-    category: "",
-    brand: "",
-    price: "",
-    image: "",
+    id: id,
+    title: title,
+    description: description,
+    category: category,
+    brand: brand,
+    price: price,
+    image: image,
   });
   const submitHandler = (e) => {
     e.preventDefault();
-    addProduct({ ...productData, id: uuidv4() });
+    editProduct(productData);
     setProductData({
       ...productData,
       id: "",
@@ -55,7 +56,10 @@ export default function AddProduct({
     setOpen(true);
     setTimeout(() => {
       setOpen(false);
-    }, 5000);
+      if (props && props.history) {
+        props.history.push("/");
+      }
+    }, 2500);
   };
   const formInputChangedHandler = (event) => {
     setProductData({
@@ -63,14 +67,7 @@ export default function AddProduct({
       [event.target.id]: event.target.value,
     });
   };
-
-  const handleImageChange = (e) => {
-    setProductData({
-      ...productData,
-      image: URL.createObjectURL(e.target.files[0]),
-    });
-  };
-
+  const classes = useStyles();
   return (
     <div className="formdata">
       <Container component="main" maxWidth="md" elevation={2}>
@@ -143,15 +140,6 @@ export default function AddProduct({
                 />
               </Grid>
               <Grid item xs={12}>
-                <TextField
-                  id="img_upld"
-                  required
-                  type="file"
-                  onChange={(e) => handleImageChange(e)}
-                  accept="image/*"
-                />
-              </Grid>
-              <Grid item xs={12}>
                 <Button
                   type="submit"
                   variant="contained"
@@ -167,7 +155,7 @@ export default function AddProduct({
         <Snackbar
           open={open}
           onClose={handleClose}
-          message="Product added successfully"
+          message="Product Updated successfully"
         />
       </Container>
     </div>
